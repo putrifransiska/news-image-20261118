@@ -13,9 +13,9 @@ await page.evaluate(() => document.fonts.ready);
 const report = await page.evaluate(() => {
   const r = (s) => document.querySelector(s).getBoundingClientRect();
   const date = r('#date'), rule = r('.rule');
-  const clipped = [...document.querySelectorAll('h1,h2,h3,p,.strip span')]
+  const clipped = [...document.querySelectorAll("h1,h2,h3,p,.strip span,.also li")]
     .filter((e) => e.scrollWidth > e.clientWidth + 1).map((e) => e.textContent.slice(0, 30));
-  const lastBrief = Math.max(...[...document.querySelectorAll('.brief')].map((e) => e.getBoundingClientRect().bottom));
+  const lastBrief = Math.max(...[...document.querySelectorAll(".brief,.also li")].map((e) => e.getBoundingClientRect().bottom));
   return { dateBottom: date.bottom, ruleTop: rule.top, dateWidth: date.width, lastBrief, footTop: r('.foot').top, clipped };
 });
 console.log(JSON.stringify(report));
